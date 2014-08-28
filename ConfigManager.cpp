@@ -1,4 +1,5 @@
 #include "ConfigManager.h"
+
 #include <fstream>
 
 std::map<std::string, float>		ConfigManager::sFloatConsts;

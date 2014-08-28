@@ -1,6 +1,5 @@
 #include "Collider.h"
 
-
 Collider::Collider()
 :m_Shape(nullptr), m_Fixture(nullptr)
 {
