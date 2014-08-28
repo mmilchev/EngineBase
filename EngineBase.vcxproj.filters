@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{08cc241b-ef60-49b0-af9b-71c6f5eafc2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{5c5d61a0-f87b-4a61-87e8-fad4605b3fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Helpers">
+      <UniqueIdentifier>{bbbb666a-cd80-4f44-8c97-2fb811e6fa01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Modules">
+      <UniqueIdentifier>{d2ba54ac-c276-44c4-bf2a-8188e5923ddc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Modules\Scene">
+      <UniqueIdentifier>{b78e1fb6-0298-4ce9-836d-cb6de91fa0bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Modules\Graphics">
+      <UniqueIdentifier>{cabe639c-9af8-437a-be5f-5c5c24e27481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Modules\Physics">
+      <UniqueIdentifier>{81ca6649-a3cb-413c-9427-288c3c22f04e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Geometry">
+      <UniqueIdentifier>{3faa0b51-3d5c-4207-befc-19b973b5f10c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Components">
+      <UniqueIdentifier>{4084c246-157b-4e6a-97f7-ef30ffec8bba}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="QueuedVectorPtr.h">
+      <Filter>Header\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header\Modules\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header\Modules\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform2D.h">
+      <Filter>Header\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
+      <Filter>Header\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Header\Modules\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Header\Modules\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header\Modules\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Header\Modules\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Header\Modules\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneModule.h">
+      <Filter>Header\Modules\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsModule.h">
+      <Filter>Header\Modules\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsModule.h">
+      <Filter>Header\Modules\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header\Modules\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>Header\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Header\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererComponent.h">
+      <Filter>Header\Modules\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="QueuedVector.h">
+      <Filter>Header\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigManager.h">
+      <Filter>Header\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Header\Modules\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionCallback.h">
+      <Filter>Header\Modules\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionData.h">
+      <Filter>Header\Modules\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicBehaviour.h">
+      <Filter>Header\Modules\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="InputInteractionComponent.h">
+      <Filter>Header\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="WatchPtr.h">
+      <Filter>Header\Helpers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneModule.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsModule.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsModule.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTime.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="RendererComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionCallback.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicBehaviour.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="InputInteractionComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
