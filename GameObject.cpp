@@ -111,27 +111,31 @@ void GameObject::PushDynamicBehaviour(DynamicBehaviour* behaviour)
 GameObject* GameObject::FindByName(std::string const& name)
 {
 	auto& gObjects = SceneModule::GetSceneGameObjects();
-	auto result = std::find_if(gObjects.begin(), gObjects.end(),
-		[&name](const std::unique_ptr<GameObject>& gObject){ return gObject->GetName() == name; });
 
-	//If we didn't find anything return NULL
-	if (result == gObjects.end())
-		return nullptr;
+	for (auto const& gObject : gObjects)
+	{
+		if (gObject->GetName() == name)
+		{
+			return gObject.get();
+		}
+	}
 
-	return (*result).get();
+	return nullptr;
 }
 
 GameObject* GameObject::FindByTag(std::string const& tag)
 {
 	auto& gObjects = SceneModule::GetSceneGameObjects();
-	auto result = std::find_if(gObjects.begin(), gObjects.end(),
-		[&tag](const std::unique_ptr<GameObject>& gObject){ return gObject->GetTag() == tag; });
+	
+	for (auto const& gObject : gObjects)
+	{
+		if (gObject->GetTag() == tag)
+		{
+			return gObject.get();
+		}
+	}
 
-	//If we didn't find anything return NULL
-	if (result == gObjects.end())
-		return nullptr;
-
-	return (*result).get();
+	return nullptr;
 }
 
 std::vector<GameObject*> GameObject::FindObjectsByTag(std::string const& tag)
