@@ -38,7 +38,7 @@ struct Watchable {
 		nullReferencesTo();
 	}
 
-	~Watchable()
+	virtual ~Watchable()
 	{
 		nullReferencesTo();
 	}
