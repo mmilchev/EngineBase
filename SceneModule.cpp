@@ -26,6 +26,9 @@ void SceneModule::Update()
 	for (auto obj : justAdded)
 	{
 		gameObjects.push_back(std::unique_ptr<GameObject>(obj));
+	}
+	for (auto obj : justAdded)
+	{
 		obj->Initialize();
 	}
 
