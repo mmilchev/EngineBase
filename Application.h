@@ -13,10 +13,11 @@ class Application
 public:
 	Application(const sf::VideoMode& mode, const std::string& title, sf::Uint32 style, const sf::ContextSettings& settings);
 
-	void Initialize();
+	void Initialize(bool useRenderTexture);
 
 	void Run();
 
+	static sf::RenderTarget* GetDefaultRenderTarget();
 	static sf::RenderWindow& GetWindow();
 	static SceneModule& GetSceneModule();
 	static PhysicsModule& GetPhysicsModule();
@@ -33,6 +34,8 @@ private:
 	GameTime m_GameTime;
 
 	sf::RenderWindow m_Window;
+
+	bool m_UseRenderTexture;
 
 	static Application* sInstance;
 

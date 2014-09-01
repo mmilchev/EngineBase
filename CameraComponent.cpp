@@ -64,7 +64,7 @@ sf::Vector2f CameraComponent::ScreenToWorldSpace(sf::Vector2i const& pos) const
 
 void CameraComponent::Awake()
 {
-	SetRenderTarget(Application::GetGraphicsModule().GetRenderTexture());
+	SetRenderTarget(Application::GetDefaultRenderTarget());
 	AdjustScreenSize();
 }
 

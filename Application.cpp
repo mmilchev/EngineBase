@@ -6,15 +6,17 @@
 
 Application* Application::sInstance = nullptr;
 
-Application::Application(const sf::VideoMode& mode, const std::string& title, sf::Uint32 style, const sf::ContextSettings& settings )
+Application::Application(const sf::VideoMode& mode, const std::string& title, sf::Uint32 style, const sf::ContextSettings& settings)
 : m_Window(mode, title, style, settings)
 {
 	sInstance = this;
 }
 
-void Application::Initialize()
+void Application::Initialize(bool useRenderTexture)
 {
 	m_ResourceManager.PreloadResources();
+
+	m_UseRenderTexture = useRenderTexture;
 
 	m_GraphicsModule.Initialize(m_Window.getSize());
 }
@@ -32,6 +34,14 @@ void Application::Run()
 
 		RenderFrame();
 	}
+}
+
+sf::RenderTarget* Application::GetDefaultRenderTarget()
+{
+	if (sInstance->m_UseRenderTexture)
+		return GetGraphicsModule().GetRenderTexture();
+
+	return &sInstance->m_Window;
 }
 
 sf::RenderWindow& Application::GetWindow()
@@ -87,14 +97,14 @@ void Application::UpdateFrame()
 
 	//Late update after everything else
 	m_SceneModule.LateUpdate();
-	
+
 	//Remove destroyed obejcts
 	m_SceneModule.DestroyRemovedObjects();
 }
 
 void Application::RenderFrame()
 {
-	/* Workaround over a bug in SFML. Render textures won't clear properly on some graphics cards 
+	/* Workaround over a bug in SFML. Render textures won't clear properly on some graphics cards
 	if this isn't called */
 	m_Window.resetGLStates();
 
@@ -102,7 +112,10 @@ void Application::RenderFrame()
 
 	m_GraphicsModule.Render();
 
-	m_Window.draw(m_GraphicsModule.GetSprite());
-
+	if (m_UseRenderTexture)
+	{
+		m_Window.draw(m_GraphicsModule.GetSprite());
+	}
+	
 	m_Window.display();
 }
