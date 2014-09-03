@@ -1,6 +1,8 @@
 ﻿#ifndef INPUT_INTERACTION_COMPONENT_H
 #define INPUT_INTERACTION_COMPONENT_H
+
 #include "Component.h"
+#include "IShaped.h"
 #include <SFML/System/Vector2.hpp>
 
 class SpriteRenderer;
@@ -23,7 +25,7 @@ public:
 	inline void SetPressed(bool pressed) { m_Pressed = pressed; }
 private:
 
-	SpriteRenderer* m_Renderer;
+	IShaped* m_ShapedComponent;
 
 	bool m_Hover;
 	bool m_Pressed;

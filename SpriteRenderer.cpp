@@ -10,11 +10,6 @@ SpriteRenderer::SpriteRenderer(const std::string& textureName)
 	m_TextureName = textureName;
 }
 
-
-SpriteRenderer::~SpriteRenderer()
-{
-}
-
 void SpriteRenderer::Awake()
 {
 	SetTextureByName(m_TextureName);
@@ -23,6 +18,11 @@ void SpriteRenderer::Awake()
 void SpriteRenderer::Render(sf::RenderTarget& renderTarget)
 {
 	RenderSprite(m_Sprite, m_SpriteSize, *m_GameObject->Transform(), renderTarget);
+}
+
+bool SpriteRenderer::Contains(sf::Vector2f const& pos)
+{
+	return m_Sprite.getGlobalBounds().contains(pos);
 }
 
 void SpriteRenderer::SetTextureByName(std::string const& texName)

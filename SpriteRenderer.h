@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RendererComponent.h"
+#include "IShaped.h"
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -9,16 +10,17 @@
 class TransformComponent;
 
 class SpriteRenderer
-	: public RendererComponent
+	: public RendererComponent, public IShaped
 {
 public:
 	explicit SpriteRenderer(const std::string& textureName);
-	~SpriteRenderer();
 
 	void Awake() override;
 
 	void Render(sf::RenderTarget& renderTarget) override;
 	
+	bool Contains(sf::Vector2f const& pos) override;
+
 	void SetTextureByName(const std::string& texName);
 	void SetSpriteSize(const sf::Vector2f& size);
 	void SetDefaultOrigin(const sf::Vector2f& origin);

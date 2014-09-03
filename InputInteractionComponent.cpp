@@ -6,13 +6,13 @@
 #include "Input.h"
 
 InputInteractionComponent::InputInteractionComponent()
-:m_Hover(false), m_Pressed(false), m_Renderer(nullptr)
+:m_Hover(false), m_Pressed(false), m_ShapedComponent(nullptr)
 {
 }
 
 void InputInteractionComponent::Awake()
 {
-	m_Renderer = m_GameObject->GetComponent<SpriteRenderer>();
+	m_ShapedComponent = m_GameObject->GetComponent<IShaped>();
 }
 
 void InputInteractionComponent::OnSignalingInitiazation()
@@ -31,7 +31,7 @@ bool InputInteractionComponent::Contains(sf::Vector2i const& mousePos)
 	for (auto const& camera : cameras)
 	{
 		if (camera->ShouldRenderLayer(m_GameObject->GetLayer())
-			&& m_Renderer->GetSprite().getGlobalBounds().contains(camera->ScreenToWorldSpace(mousePos)))
+			&& m_ShapedComponent->Contains(camera->ScreenToWorldSpace(mousePos)))
 			return true;
 	}
 	return false;

@@ -24,6 +24,7 @@
     <ClInclude Include="GraphicsModule.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputInteractionComponent.h" />
+    <ClInclude Include="IShaped.h" />
     <ClInclude Include="PhysicsModule.h" />
     <ClInclude Include="QueuedVector.h" />
     <ClInclude Include="QueuedVectorPtr.h" />
