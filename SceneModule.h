@@ -1,6 +1,7 @@
 #ifndef SCENE_MODULE_H
 #define SCENE_MODULE_H
 #include "Scene.h"
+#include "QueuedVector.h"
 
 class SceneModule
 {
@@ -25,8 +26,8 @@ private:
 
 	Scene						m_RunningScene;
 
-	std::vector<GameObject*>	m_GameObjectsJustAdded;
-	std::vector<GameObject*>	m_GameObjectsJustRemoved;
+	QueuedVector<GameObject*>	m_GameObjectsJustAdded;
+	QueuedVector<GameObject*>	m_GameObjectsJustRemoved;
 
 	//Id management
 	std::queue<unsigned int>    m_DestroyedIds;

@@ -52,6 +52,7 @@ public:
 	void PushDynamicBehaviour(DynamicBehaviour* behaviour);
 	
 	inline bool IsDynamic() const { return m_DynamicBehaviours.size() > 0; }
+	inline bool IsDestroyed() const { return m_Destroyed; }
 
 	inline void SetTag(const std::string& tag) { m_Tag = tag; }
 	inline void SetName(const std::string& name) { m_Name = name; }
@@ -69,6 +70,7 @@ public:
 private:
 	unsigned int m_Id;
 	bool m_Instantiated;
+	bool m_Destroyed;
 
 	std::string	m_Name;
 	std::string	m_Tag;

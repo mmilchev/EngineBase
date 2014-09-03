@@ -13,10 +13,6 @@ GameTime::GameTime()
 	m_FrameTimeSamples.push_back(0); //initial
 }
 
-GameTime::~GameTime()
-{
-}
-
 float GameTime::DeltaTime()
 {
 	return sInstance->m_CurrentFrameTime - sInstance->m_LastFrameTime;
@@ -37,6 +33,16 @@ void GameTime::Update()
 	m_LastFrameTime = m_CurrentFrameTime;
 	m_CurrentFrameTime = m_Clock.getElapsedTime().asSeconds();
 	AddSample(DeltaTime());
+}
+
+void GameTime::Reset()
+{
+	m_LastFrameTime = 0;
+	m_CurrentFrameTime = 0;
+	m_FrameTimeSamples.clear();
+	m_FrameTimeSamples.push_back(0);
+
+	m_Clock.restart();
 }
 
 std::string GameTime::GetTextInfo()

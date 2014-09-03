@@ -20,6 +20,8 @@ public:
 
 	void ProcessQueued();
 
+	void Clear();
+
 	template<class PredTpye>
 	void Sort(PredTpye pred);
 
@@ -86,6 +88,12 @@ void QueuedVector<VecType>::ProcessQueued()
 			m_VectorData.erase(found);
 		m_RemoveQueue.pop();
 	}
+}
+
+template <class VecType>
+void QueuedVector<VecType>::Clear()
+{
+	m_VectorData.clear();
 }
 
 template <class VecType>

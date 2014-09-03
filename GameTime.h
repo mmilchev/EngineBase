@@ -9,15 +9,16 @@ class GameTime
 {
 public:
 	GameTime();
-	~GameTime();
 	static int CalculateFramesPerSecond();
 	static float DeltaTime();
 	static float Time();
 	static float AverageFrameTime();
 	static int FramesPerSecond();
 	static std::string GetTextInfo();
-	void Update();
 	
+	void Update();
+	void Reset();
+
 private:
 	float m_LastFrameTime;
 	float m_CurrentFrameTime;

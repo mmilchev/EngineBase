@@ -5,7 +5,7 @@
 
 //Private constructor 
 GameObject::GameObject()
-:m_Name(""), m_Tag("Default"), m_Layer(0), m_Instantiated(false), m_Id(0)
+:m_Name(""), m_Tag("Default"), m_Layer(0), m_Instantiated(false), m_Destroyed(false), m_Id(0)
 {
 	//Every gameObject has a transform
 	AddComponent(new TransformComponent());
@@ -170,7 +170,8 @@ void GameObject::Instantiate(GameObject* gObject)
 
 void GameObject::Destroy(GameObject* gObject)
 {
-	if (!gObject->m_Instantiated)
+	if (!gObject->m_Instantiated ||
+		gObject->m_Destroyed)
 		return;
 
 	Application::GetSceneModule().UnregisterGameObject(gObject);
@@ -180,6 +181,8 @@ void GameObject::Destroy(GameObject* gObject)
 	{
 		Destroy(child);
 	}
+
+	gObject->m_Destroyed = true;
 }
 
 TransformComponent* GameObject::Transform()

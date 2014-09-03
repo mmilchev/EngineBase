@@ -23,6 +23,8 @@ void Application::Initialize(bool useRenderTexture)
 
 void Application::Run()
 {
+	m_GameTime.Reset();
+
 	while (m_Window.isOpen())
 	{
 		//Update the time
