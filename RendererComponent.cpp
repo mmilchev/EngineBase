@@ -1,5 +1,7 @@
 #include "RendererComponent.h"
 #include "Application.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
 
 void RendererComponent::OnSignalingInitiazation()
 {
@@ -24,4 +26,12 @@ void RendererComponent::SetOrder(int order)
 RendererComponent::RendererComponent()
 :m_Order(0)
 {
+}
+
+void RendererComponent::ApplyTransformation(sf::Transformable& transformable)
+{
+	auto transform = m_GameObject->Transform();
+	transformable.setPosition(transform->Position());
+	transformable.setRotation(transform->Rotation());
+	transformable.setScale(GetScale(transform));
 }

@@ -2,7 +2,9 @@
 #define RENDERER_COMPONENT_H
 
 #include "Component.h"
+#include <SFML/Graphics.hpp>
 
+class TransformComponent;
 namespace sf
 {
 	class RenderTarget;
@@ -23,6 +25,10 @@ public:
 	
 protected:
 	RendererComponent();
+
+	void ApplyTransformation(sf::Transformable& transformable);
+	//Passing the argument for optimization
+	virtual sf::Vector2f GetScale(TransformComponent const* transform) const = 0;
 
 	int m_Order;
 };

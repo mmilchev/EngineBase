@@ -120,6 +120,13 @@
     <ClInclude Include="IShaped.h">
       <Filter>Header\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="TextRenderer.h" />
+    <ClInclude Include="Tween.h">
+      <Filter>Header\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Tween2.h">
+      <Filter>Header\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -189,6 +196,13 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="InputInteractionComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp" />
+    <ClCompile Include="Tween.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Tween2.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

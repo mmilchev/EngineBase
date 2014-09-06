@@ -29,9 +29,10 @@ public:
 	bool ContainsPoint(float x, float y) const;
 	bool Intersects(const SpriteRenderer& renderer) const;
 	sf::Sprite& GetSprite();
-
-	static void RenderSprite(sf::Sprite& sp, const sf::Vector2f& spriteSize, const TransformComponent& transform, sf::RenderTarget& target);
+	
 	static sf::Vector2f GetTextureSize(const sf::Sprite& sp);
+protected:
+	sf::Vector2f GetScale(TransformComponent const* transform) const override;
 
 private:
 	sf::Sprite		m_Sprite;

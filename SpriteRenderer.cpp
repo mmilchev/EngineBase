@@ -17,7 +17,8 @@ void SpriteRenderer::Awake()
 
 void SpriteRenderer::Render(sf::RenderTarget& renderTarget)
 {
-	RenderSprite(m_Sprite, m_SpriteSize, *m_GameObject->Transform(), renderTarget);
+	ApplyTransformation(m_Sprite);
+	renderTarget.draw(m_Sprite);
 }
 
 bool SpriteRenderer::Contains(sf::Vector2f const& pos)
@@ -29,25 +30,6 @@ void SpriteRenderer::SetTextureByName(std::string const& texName)
 {
 	SetSpriteTexture(ResourceManager::GetTexture(texName));
 	m_TextureName = texName;
-}
-
-void SpriteRenderer::RenderSprite( sf::Sprite& sp,const sf::Vector2f& spriteSize, 
-	const TransformComponent& transform, sf::RenderTarget& target )
-{
-	sp.setPosition(transform.Position());
-	sp.setRotation(transform.Rotation());
-	auto textureSize = GetTextureSize(sp);
-	auto scale = transform.Scale();
-	float scaleFactorX = scale.x;
-	float scaleFactorY = scale.y;
-	if(!sp.getTexture()->isRepeated())
-	{
-		scaleFactorX *= (spriteSize.x / textureSize.x);
-		scaleFactorY *= (spriteSize.y / textureSize.y);
-	}
-	sp.setScale(scaleFactorX, scaleFactorY);
-	
-	target.draw(sp);
 }
 
 void SpriteRenderer::SetSpriteTexture(const sf::Texture& tex )
@@ -75,6 +57,21 @@ sf::Vector2f SpriteRenderer::GetTextureSize(const sf::Sprite& sp)
 {
 	auto size = sp.getTexture()->getSize();
 	return sf::Vector2f(static_cast<float>(size.x), static_cast<float>(size.y));
+}
+
+sf::Vector2f SpriteRenderer::GetScale(TransformComponent const* transform) const
+{
+	auto textureSize = GetTextureSize(m_Sprite);
+	auto scale = transform->Scale();
+	float scaleFactorX = scale.x;
+	float scaleFactorY = scale.y;
+	if (!m_Sprite.getTexture()->isRepeated())
+	{
+		scaleFactorX *= (m_SpriteSize.x / textureSize.x);
+		scaleFactorY *= (m_SpriteSize.y / textureSize.y);
+	}
+
+	return sf::Vector2f(scaleFactorX, scaleFactorY);
 }
 
 sf::Vector2f SpriteRenderer::GetSpriteSize() const

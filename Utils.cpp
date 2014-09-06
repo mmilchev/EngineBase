@@ -14,7 +14,6 @@
 #define GetCurrentDir getcwd
 #endif
 
-#define PI 3.14159265f
 #define B2_SCALE_COEF 0.02f
 
 //Source: http://www.cplusplus.com/forum/unices/3548/

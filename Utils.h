@@ -5,6 +5,8 @@
 #include <Box2D/Common/b2Math.h>
 #include <SFML/System/Vector2.hpp>
 
+#define PI 3.14159265f
+
 std::vector<std::string> GetDirFiles(std::string const& path);
 std::string GetFileExtension(std::string const& file);
 std::string GetWorkingDirectory();
