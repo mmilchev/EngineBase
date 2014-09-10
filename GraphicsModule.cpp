@@ -19,6 +19,7 @@ void GraphicsModule::Initialize(sf::Vector2u const& targetRes)
 void GraphicsModule::RegisterRenderer(RendererComponent* comp)
 {
 	m_Renderers.Add(comp);
+	SignalRenderersResorting();
 }
 
 void GraphicsModule::UnregisterRenderer(RendererComponent* comp)
