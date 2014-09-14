@@ -4,7 +4,7 @@
 GameTime* GameTime::sInstance = nullptr;
 
 GameTime::GameTime()
-:m_LastFrameTime(0), m_CurrentFrameTime(0)
+	:m_LastFrameTime(0), m_CurrentFrameTime(0), m_TimeScale(1)
 {
 	//Only one instance of GameTime is allowed
 	assert(sInstance == nullptr);
@@ -15,8 +15,14 @@ GameTime::GameTime()
 
 float GameTime::DeltaTime()
 {
+	return DeltaTimeUnscaled() * sInstance->m_TimeScale;
+}
+
+float GameTime::DeltaTimeUnscaled()
+{
 	return sInstance->m_CurrentFrameTime - sInstance->m_LastFrameTime;
 }
+
 
 float GameTime::Time()
 {
@@ -79,4 +85,14 @@ float GameTime::AverageFrameTime()
 	}
 
 	return sum / count;
+}
+
+void GameTime::SetScale(float scale)
+{
+	sInstance->m_TimeScale = scale;
+}
+
+float GameTime::GetScale()
+{
+	return sInstance->m_TimeScale;
 }

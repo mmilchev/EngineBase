@@ -18,5 +18,4 @@ bool BoxInteractionComponent::Contains(sf::Vector2f const& pos)
 BoxInteractionComponent::BoxInteractionComponent(int width, int height)
 	:m_Width(width), m_Height(height)
 {
-
 }
