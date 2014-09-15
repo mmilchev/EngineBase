@@ -1,18 +1,28 @@
 #pragma once
 
+#include <memory>
+
 class Tween
 {
 public:
+	class ITweenFunction
+	{
+	public:
+		virtual ~ITweenFunction(){ }
+		virtual float GetCoefValue(float timeCoef) = 0;
+	};
 	enum TweenType
 	{
 		Linear,
 		SineWave,
-		Logaritmic
+		Logaritmic,
+		Expo3
 	};
 
 	explicit Tween(bool isAngle = false);
 
 	void Set(float from, float to, float time, TweenType type = TweenType::Linear);
+	void Set(float from, float to, float time, ITweenFunction* function);
 
 	void Update(float dt);
 	float GetValue() const;
@@ -20,7 +30,28 @@ public:
 	bool Done() const;
 	bool JustFinished() const;
 private:
-	TweenType m_Type;
+	class LinearTween
+		: public ITweenFunction
+	{
+		virtual float GetCoefValue(float timeCoef) override;
+	};
+	class SineTween
+		: public ITweenFunction
+	{
+		virtual float GetCoefValue(float timeCoef) override;
+	};
+	class LogTween
+		: public ITweenFunction
+	{
+		virtual float GetCoefValue(float timeCoef) override;
+	};
+	class Expo3Tween
+		: public ITweenFunction
+	{
+		virtual float GetCoefValue(float timeCoef) override;
+	};
+
+	std::unique_ptr<ITweenFunction> m_TweenFunction;
 	float m_StartValue;
 	float m_TargetValue;
 	float m_Coef;

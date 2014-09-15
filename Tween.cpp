@@ -10,12 +10,35 @@ m_Time(1), m_MaxTime(1), m_FinishedThisFrame(false), m_IsAngle(isAngle)
 
 void Tween::Set( float from, float to, float time, TweenType type /*= TweenType::Linear*/ )
 {
+	switch (type)
+	{
+	case Tween::Linear:
+		Set(from, to, time, new LinearTween());
+		break;
+	case Tween::SineWave:
+		Set(from, to, time, new SineTween());
+		break;
+	case Tween::Logaritmic:
+		Set(from, to, time, new LogTween());
+		break;
+	case Tween::Expo3:
+		Set(from, to, time, new Expo3Tween());
+		break;
+	default:
+		break;
+	}
+}
+
+void Tween::Set(float from, float to, float time, ITweenFunction* function)
+{
 	m_StartValue = from;
 	m_TargetValue = to;
 	m_Coef = 0;
 	m_MaxTime = time;
 	m_Time = 0;
-	m_Type = type;
+
+	m_TweenFunction = std::unique_ptr<ITweenFunction>(function);
+
 	m_FinishedThisFrame = false;
 }
 
@@ -23,18 +46,8 @@ void Tween::Update( float dt )
 {
 	bool finishedBefore = Done();
 	m_Time = Clamp(m_Time + dt, 0, m_MaxTime);
-	if(m_Type == Linear)
-	{
-		m_Coef = m_Time / m_MaxTime;
-	}
-	else if (m_Type == SineWave)
-	{
-		m_Coef = (sin(PI * (m_Time / m_MaxTime - 1 / 2.f)) + 1) / 2.f;
-	}
-	else if (m_Type == Logaritmic)
-	{
-		m_Coef = log10(1 + (m_Time / m_MaxTime) * 9); //log10
-	}
+	
+	m_Coef = m_TweenFunction->GetCoefValue(m_Time / m_MaxTime);
 
 	if(Done())
 		m_Coef = 1;
@@ -55,4 +68,24 @@ bool Tween::Done() const
 bool Tween::JustFinished() const
 {
 	return m_FinishedThisFrame;
+}
+
+float Tween::LinearTween::GetCoefValue(float timeCoef)
+{
+	return timeCoef;
+}
+
+float Tween::SineTween::GetCoefValue(float timeCoef)
+{
+	return (sin(PI * (timeCoef - 1 / 2.f)) + 1) * 0.5f;
+}
+
+float Tween::LogTween::GetCoefValue(float timeCoef)
+{
+	return log10(1 + timeCoef * 9); //log10
+}
+
+float Tween::Expo3Tween::GetCoefValue(float timeCoef)
+{
+	return (powf(2 * timeCoef - 1, 3) + 1) * 0.5f;
 }
