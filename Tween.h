@@ -16,7 +16,9 @@ public:
 		Linear,
 		SineWave,
 		Logaritmic,
-		Expo3
+		Expo3,
+		Expo5,
+		Expo7
 	};
 
 	explicit Tween(bool isAngle = false);
@@ -45,10 +47,16 @@ private:
 	{
 		virtual float GetCoefValue(float timeCoef) override;
 	};
-	class Expo3Tween
+	class ExpoTween
 		: public ITweenFunction
 	{
+	public:
+		ExpoTween(float power);
+
 		virtual float GetCoefValue(float timeCoef) override;
+	
+	private:
+		float m_Power;
 	};
 
 	std::unique_ptr<ITweenFunction> m_TweenFunction;

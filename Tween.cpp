@@ -22,7 +22,13 @@ void Tween::Set( float from, float to, float time, TweenType type /*= TweenType:
 		Set(from, to, time, new LogTween());
 		break;
 	case Tween::Expo3:
-		Set(from, to, time, new Expo3Tween());
+		Set(from, to, time, new ExpoTween(3));
+		break;
+	case Tween::Expo5:
+		Set(from, to, time, new ExpoTween(5));
+		break;
+	case Tween::Expo7:
+		Set(from, to, time, new ExpoTween(7));
 		break;
 	default:
 		break;
@@ -85,7 +91,12 @@ float Tween::LogTween::GetCoefValue(float timeCoef)
 	return log10(1 + timeCoef * 9); //log10
 }
 
-float Tween::Expo3Tween::GetCoefValue(float timeCoef)
+float Tween::ExpoTween::GetCoefValue(float timeCoef)
 {
-	return (powf(2 * timeCoef - 1, 3) + 1) * 0.5f;
+	return (powf(2 * timeCoef - 1, m_Power) + 1) * 0.5f;
+}
+
+Tween::ExpoTween::ExpoTween(float power)
+	:m_Power(power)
+{
 }
