@@ -7,44 +7,9 @@ SceneModule::SceneModule()
 }
 
 //Data driven approach - objects ask modules for initialization
-void SceneModule::SignalQueuedObjects()
+void SceneModule::ProcessQueuedObjects()
 {
-	m_GameObjectsJustAdded.ProcessQueued();
-
-	for (int i = 0; i < m_GameObjectsJustAdded.Size(); ++i)
-	{
-		m_GameObjectsJustAdded[i]->SignalInitialization();
-	}
-}
-
-void SceneModule::Update()
-{
-	auto& gameObjects = m_RunningScene.m_GameObjects;
-
-	//Add to the pool and call Awake() on each component
-	for (int i = 0; i < m_GameObjectsJustAdded.Size(); ++i)
-	{
-		gameObjects.push_back(std::unique_ptr<GameObject>(m_GameObjectsJustAdded[i]));
-	}
-	for (int i = 0; i < m_GameObjectsJustAdded.Size(); ++i)
-	{
-		m_GameObjectsJustAdded[i]->Initialize();
-	}
-	m_GameObjectsJustAdded.Clear();
-
-	//Update all game objects (dynamic componenets)
-	for (auto& gObject : gameObjects)
-		gObject->Update();
-}
-
-void SceneModule::LateUpdate()
-{
-	auto& gameObjects = m_RunningScene.m_GameObjects;
-
-	//Late update all game objects (dynamic componenets)
-	for (auto& gObject : gameObjects)
-		gObject->LateUpdate();
-
+	//Remove deleted objects
 	m_GameObjectsJustRemoved.ProcessQueued();
 
 	//Remove objects from the pool
@@ -53,6 +18,41 @@ void SceneModule::LateUpdate()
 	RemoveFromPool();
 
 	m_GameObjectsJustRemoved.Clear();
+
+	//Init added objects
+	m_GameObjectsJustAdded.ProcessQueued();
+
+	for (int i = 0; i < m_GameObjectsJustAdded.Size(); ++i)
+	{
+		m_GameObjectsJustAdded[i]->SignalInitialization();
+	}
+
+	//Add to the pool and call Awake() on each component
+	for (int i = 0; i < m_GameObjectsJustAdded.Size(); ++i)
+	{
+		m_GameObjects.push_back(std::unique_ptr<GameObject>(m_GameObjectsJustAdded[i]));
+	}
+	for (int i = 0; i < m_GameObjectsJustAdded.Size(); ++i)
+	{
+		m_GameObjectsJustAdded[i]->Initialize();
+	}
+
+	m_GameObjectsJustAdded.Clear();
+}
+
+
+void SceneModule::Update()
+{
+	//Update all game objects (dynamic componenets)
+	for (auto& gObject : m_GameObjects)
+		gObject->Update();
+}
+
+void SceneModule::LateUpdate()
+{
+	//Late update all game objects (dynamic componenets)
+	for (auto& gObject : m_GameObjects)
+		gObject->LateUpdate();
 }
 
 void SceneModule::DestroyRemovedObjects()
@@ -75,7 +75,7 @@ void SceneModule::UnregisterGameObject(GameObject* gObject)
 
 std::vector<std::unique_ptr<GameObject>> const& SceneModule::GetSceneGameObjects()
 {
-	return Application::GetSceneModule().m_RunningScene.m_GameObjects;
+	return Application::GetSceneModule().m_GameObjects;
 }
 
 unsigned int SceneModule::GetUniqueId()
@@ -95,25 +95,33 @@ unsigned int SceneModule::GetUniqueId()
 	return id;
 }
 
-void SceneModule::LoadScene(std::string const& sceneName)
-{
-	//Not loading anything for now
-	m_RunningScene.CreateDefaultCamera();
-}
-
 void SceneModule::RemoveFromPool()
 {
-	auto& gObjects = m_RunningScene.m_GameObjects; 
 	for (int i = 0; i < m_GameObjectsJustRemoved.Size(); ++i)
 	{
 		auto obj = m_GameObjectsJustRemoved[i];
 
-		auto found = std::find_if(gObjects.begin(), gObjects.end(),
+		auto found = std::find_if(m_GameObjects.begin(), m_GameObjects.end(),
 			[&obj](std::unique_ptr<GameObject>const& item) { return item.get() == obj; });
 
 		m_DestroyedIds.push(obj->GetId());
 
-		if (found != gObjects.end())
-			gObjects.erase(found);
+		//If the object is not already in the pool, it has to be in the Add queue
+		if (found != m_GameObjects.end())
+		{
+			m_GameObjects.erase(found);
+		}
+		else
+		{
+			//Delete object if it isn't already in the main object pool
+			m_GameObjectsJustAdded.RemoveAddedInstance(obj);
+			delete obj;
+		}
 	}
+}
+
+void SceneModule::DeleteAllObjects()
+{
+	for (unsigned int i = 0; i < m_GameObjects.size(); ++i)
+		GameObject::Destroy(m_GameObjects[i].get());
 }

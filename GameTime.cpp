@@ -47,6 +47,7 @@ void GameTime::Reset()
 	m_CurrentFrameTime = 0;
 	m_FrameTimeSamples.clear();
 	m_FrameTimeSamples.push_back(0);
+	m_TimeScale = 1;
 
 	m_Clock.restart();
 }

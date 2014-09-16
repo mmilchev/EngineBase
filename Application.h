@@ -17,6 +17,9 @@ public:
 
 	void Run();
 
+	static void ClearScene();
+	static void OnNewLevelLoaded();
+
 	static sf::RenderTarget* GetDefaultRenderTarget();
 	static sf::RenderWindow& GetWindow();
 	static SceneModule& GetSceneModule();

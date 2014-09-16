@@ -18,6 +18,8 @@ public:
 	void Remove(VecType type);
 	void RemoveAt(int index);
 
+	void RemoveAddedInstance(VecType target);
+
 	void ProcessQueued();
 
 	void Clear();
@@ -33,12 +35,21 @@ public:
 	const VecType& operator[] (const int nIndex) const;
 private:
 	//These are just queues. Not allocating/deleting anything
-	std::queue<VecType> m_AddQueue;
-	std::queue<VecType> m_RemoveQueue;
+	std::vector<VecType> m_AddQueue;
+	std::vector<VecType> m_RemoveQueue;
 
 	//Data is not deleted if it's a pointer
 	std::vector<VecType> m_VectorData;
 };
+
+template<class VecType>
+void QueuedVector<VecType>::RemoveAddedInstance(VecType target)
+{
+	auto found = std::find_if(m_AddQueue.begin(), m_AddQueue.end(),
+		[target](const VecType& item) { return item == target; });
+	if (found != m_AddQueue.end())
+		m_AddQueue.erase(found);
+}
 
 template <class VecType>
 QueuedVector<VecType>::QueuedVector()
@@ -55,13 +66,13 @@ void QueuedVector<VecType>::Sort(PredTpye pred)
 template <class VecType>
 void QueuedVector<VecType>::Add(VecType type)
 {
-	m_AddQueue.push(type);
+	m_AddQueue.push_back(type);
 }
 
 template <class VecType>
 void QueuedVector<VecType>::Remove(VecType type)
 {
-	m_RemoveQueue.push(type);
+	m_RemoveQueue.push_back(type);
 }
 
 template <class VecType>
@@ -73,21 +84,21 @@ void QueuedVector<VecType>::RemoveAt(int index)
 template <class VecType>
 void QueuedVector<VecType>::ProcessQueued()
 {
-	while (!m_AddQueue.empty())
+	for (auto& item : m_AddQueue)
 	{
-		m_VectorData.push_back(m_AddQueue.front());
-		m_AddQueue.pop();
+		m_VectorData.push_back(item);
 	}
+	m_AddQueue.clear();
 
-	while (!m_RemoveQueue.empty())
+	for (auto& target : m_RemoveQueue)
 	{
-		auto target = m_RemoveQueue.front();
 		auto found = std::find_if(m_VectorData.begin(), m_VectorData.end(),
 			[target](const VecType& item) { return item == target; });
 		if (found != m_VectorData.end())
 			m_VectorData.erase(found);
-		m_RemoveQueue.pop();
 	}
+
+	m_RemoveQueue.clear();
 }
 
 template <class VecType>

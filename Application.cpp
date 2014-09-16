@@ -87,9 +87,10 @@ void Application::HandleInput()
 
 void Application::UpdateFrame()
 {
-	//Instantiate new objects
-	m_SceneModule.SignalQueuedObjects();
+	//Instantiate new objects and delete old objects
+	m_SceneModule.ProcessQueuedObjects();
 	m_PhysicsModule.InitQueuedBodies();
+	m_GraphicsModule.InitQueuedObjects();
 
 	//Initial update
 	m_SceneModule.Update();
@@ -99,9 +100,6 @@ void Application::UpdateFrame()
 
 	//Late update after everything else
 	m_SceneModule.LateUpdate();
-
-	//Remove destroyed obejcts
-	m_SceneModule.DestroyRemovedObjects();
 }
 
 void Application::RenderFrame()
@@ -120,4 +118,14 @@ void Application::RenderFrame()
 	}
 	
 	m_Window.display();
+}
+
+void Application::ClearScene()
+{
+	sInstance->m_SceneModule.DeleteAllObjects();
+}
+
+void Application::OnNewLevelLoaded()
+{
+	sInstance->m_GameTime.Reset();
 }

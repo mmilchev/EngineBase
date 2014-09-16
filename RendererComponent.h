@@ -14,7 +14,6 @@ class RendererComponent
 	: public Component
 {
 public:
-
 	void OnSignalingInitiazation() override;
 	void OnDestruction() override;
 	

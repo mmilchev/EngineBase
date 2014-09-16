@@ -111,3 +111,9 @@ void TransformComponent::GetChildren(std::vector<TransformComponent*>& children)
 		child->GetChildren(children);
 	}
 }
+
+void TransformComponent::OnDestruction()
+{
+	if (m_Parent != nullptr)
+		m_Parent->RemoveChild(this);
+}

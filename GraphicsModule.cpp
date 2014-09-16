@@ -16,6 +16,12 @@ void GraphicsModule::Initialize(sf::Vector2u const& targetRes)
 	m_RenderSprite.setTexture(m_RenderTexture.getTexture());
 }
 
+void GraphicsModule::InitQueuedObjects()
+{
+	m_Cameras.ProcessQueued();
+	m_Renderers.ProcessQueued();
+}
+
 void GraphicsModule::RegisterRenderer(RendererComponent* comp)
 {
 	m_Renderers.Add(comp);
@@ -56,9 +62,6 @@ void GraphicsModule::SignalRenderersResorting()
 void GraphicsModule::Render()
 {
 	m_RenderTexture.clear(); //Clear the backbuffer
-
-	m_Cameras.ProcessQueued();
-	m_Renderers.ProcessQueued();
 
 	CheckAndSortRenderers();
 

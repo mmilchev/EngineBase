@@ -10,6 +10,8 @@ class TransformComponent
 public:
 	TransformComponent();
 
+	virtual void OnDestruction();
+
 	sf::Vector2f Position() const;
 	sf::Vector2f Scale() const;
 	float Rotation() const ;

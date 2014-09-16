@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 CameraComponent::CameraComponent()
+	:m_OrthoSize(5)
 {
 	m_LayerMask = ~0; //All layers
 	SetViewport(0, 0, 1, 1);
@@ -29,7 +30,7 @@ void CameraComponent::OnSignalingInitiazation()
 
 void CameraComponent::OnDestruction()
 {
-	Application::GetGraphicsModule().RegisterCamera(this);
+	Application::GetGraphicsModule().UnregisterCamera(this);
 }
 
 void CameraComponent::SetLayerMask(int mask)

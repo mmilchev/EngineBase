@@ -1,14 +1,16 @@
 #ifndef SCENE_MODULE_H
 #define SCENE_MODULE_H
-#include "Scene.h"
+
 #include "QueuedVector.h"
+#include "GameObject.h"
 
 class SceneModule
 {
 public:
 	SceneModule();
 
-	void SignalQueuedObjects();
+	void ProcessQueuedObjects();
+
 	void Update();
 	void LateUpdate();
 	void DestroyRemovedObjects();
@@ -16,15 +18,15 @@ public:
 	void RegisterGameObject(GameObject* gObject);
 	void UnregisterGameObject(GameObject* gObject);
 
+	void DeleteAllObjects();
+
 	static std::vector<std::unique_ptr<GameObject>> const& GetSceneGameObjects();
 	static std::vector<GameObject*> const& GetDestroyedObjectsThisFrame();
 	static unsigned int GetUniqueId();
-
-	void LoadScene(const std::string& sceneName);
 private:
 	void RemoveFromPool();
 
-	Scene						m_RunningScene;
+	std::vector<std::unique_ptr<GameObject>> m_GameObjects;
 
 	QueuedVector<GameObject*>	m_GameObjectsJustAdded;
 	QueuedVector<GameObject*>	m_GameObjectsJustRemoved;

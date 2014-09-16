@@ -170,8 +170,7 @@ void GameObject::Instantiate(GameObject* gObject)
 
 void GameObject::Destroy(GameObject* gObject)
 {
-	if (!gObject->m_Instantiated ||
-		gObject->m_Destroyed)
+	if (gObject->m_Destroyed)
 		return;
 
 	Application::GetSceneModule().UnregisterGameObject(gObject);

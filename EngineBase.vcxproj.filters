@@ -78,9 +78,6 @@
     <ClInclude Include="PhysicsModule.h">
       <Filter>Header\Modules\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Header\Modules\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="GameTime.h">
       <Filter>Header\Helpers</Filter>
     </ClInclude>
@@ -171,9 +168,6 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsModule.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="GameTime.cpp">
