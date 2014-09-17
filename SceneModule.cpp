@@ -15,6 +15,8 @@ void SceneModule::ProcessQueuedObjects()
 	//Remove objects from the pool
 	DestroyRemovedObjects();
 
+	Application::ProcessQeuedObjectsInModules();
+
 	RemoveFromPool();
 
 	m_GameObjectsJustRemoved.Clear();
@@ -36,6 +38,8 @@ void SceneModule::ProcessQueuedObjects()
 	{
 		m_GameObjectsJustAdded[i]->Initialize();
 	}
+
+	Application::ProcessQeuedObjectsInModules();
 
 	m_GameObjectsJustAdded.Clear();
 }
@@ -104,16 +108,16 @@ void SceneModule::RemoveFromPool()
 		auto found = std::find_if(m_GameObjects.begin(), m_GameObjects.end(),
 			[&obj](std::unique_ptr<GameObject>const& item) { return item.get() == obj; });
 
-		m_DestroyedIds.push(obj->GetId());
-
 		//If the object is not already in the pool, it has to be in the Add queue
 		if (found != m_GameObjects.end())
 		{
+			m_DestroyedIds.push(obj->GetId());
 			m_GameObjects.erase(found);
 		}
 		else
 		{
 			//Delete object if it isn't already in the main object pool
+			//Also they were never assigned an ID
 			m_GameObjectsJustAdded.RemoveAddedInstance(obj);
 			delete obj;
 		}

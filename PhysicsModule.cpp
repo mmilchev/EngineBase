@@ -17,7 +17,7 @@ void PhysicsModule::QueueRigidBodyForInitialization(RigidBody* body)
 	m_InstQueue.push(body);
 }
 
-void PhysicsModule::InitQueuedBodies()
+void PhysicsModule::ProcessQueuedObjects()
 {
 	while (!m_InstQueue.empty())
 	{

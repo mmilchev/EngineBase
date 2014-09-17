@@ -2,10 +2,10 @@
 #include "TransformComponent.h"
 #include "DynamicBehaviour.h"
 #include "Application.h"
-
-//Private constructor 
+ 
 GameObject::GameObject()
-:m_Name(""), m_Tag("Default"), m_Layer(0), m_Instantiated(false), m_Destroyed(false), m_Id(0)
+	: m_Name(""), m_Tag("Default"), m_Layer(0), m_Instantiated(false), 
+m_Destroyed(false), m_DestroyOnSceneChange(true), m_Id(0)
 {
 	//Every gameObject has a transform
 	AddComponent(new TransformComponent());
@@ -175,6 +175,7 @@ void GameObject::Destroy(GameObject* gObject)
 
 	Application::GetSceneModule().UnregisterGameObject(gObject);
 
+	gObject->Transform()->SetParent(nullptr);
 	auto children = gObject->GetChildren();
 	for (auto child : children)
 	{

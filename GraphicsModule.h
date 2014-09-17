@@ -14,7 +14,7 @@ public:
 
 	void Initialize(const sf::Vector2u& targetRes);
 
-	void InitQueuedObjects();
+	void ProcessQueuedObjects();
 
 	void RegisterRenderer(RendererComponent* comp);
 	void UnregisterRenderer(RendererComponent* comp);

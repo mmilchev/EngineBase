@@ -17,6 +17,8 @@ public:
 
 	void Run();
 
+	static void ProcessQeuedObjectsInModules();
+
 	static void ClearScene();
 	static void OnNewLevelLoaded();
 

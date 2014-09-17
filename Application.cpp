@@ -89,8 +89,6 @@ void Application::UpdateFrame()
 {
 	//Instantiate new objects and delete old objects
 	m_SceneModule.ProcessQueuedObjects();
-	m_PhysicsModule.InitQueuedBodies();
-	m_GraphicsModule.InitQueuedObjects();
 
 	//Initial update
 	m_SceneModule.Update();
@@ -128,4 +126,10 @@ void Application::ClearScene()
 void Application::OnNewLevelLoaded()
 {
 	sInstance->m_GameTime.Reset();
+}
+
+void Application::ProcessQeuedObjectsInModules()
+{
+	sInstance->m_PhysicsModule.ProcessQueuedObjects();
+	sInstance->m_GraphicsModule.ProcessQueuedObjects();
 }

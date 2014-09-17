@@ -15,7 +15,8 @@ public:
 
 	void QueueRigidBodyForInitialization(RigidBody* body);
 
-	void InitQueuedBodies();
+	void ProcessQueuedObjects();
+
 	void StepWorld();
 
 	void SetTimeStep(float timeStep);
