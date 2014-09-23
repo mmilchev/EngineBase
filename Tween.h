@@ -18,7 +18,13 @@ public:
 		Logaritmic,
 		Expo3,
 		Expo5,
-		Expo7
+		Expo7,
+		EaseInQuad,
+		EaseInCubic,
+		EaseInQuint,
+		EaseOutQuad,
+		EaseOutCubic,
+		EaseOutQuint
 	};
 
 	explicit Tween(bool isAngle = false);
@@ -57,6 +63,29 @@ private:
 	
 	private:
 		float m_Power;
+	};
+	class EaseIn
+		: public ITweenFunction
+	{
+	public:
+		EaseIn(int power);
+
+		virtual float GetCoefValue(float timeCoef) override;
+
+	private:
+		int m_Power;
+	};
+
+	class EaseOut
+		: public ITweenFunction
+	{
+	public:
+		EaseOut(int power);
+
+		virtual float GetCoefValue(float timeCoef) override;
+
+	private:
+		int m_Power;
 	};
 
 	std::unique_ptr<ITweenFunction> m_TweenFunction;

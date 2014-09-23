@@ -30,6 +30,24 @@ void Tween::Set( float from, float to, float time, TweenType type /*= TweenType:
 	case Tween::Expo7:
 		Set(from, to, time, new ExpoTween(7));
 		break;
+	case EaseInQuad:
+		Set(from, to, time, new EaseIn(2));
+		break;
+	case EaseInCubic:
+		Set(from, to, time, new EaseIn(3));
+		break;
+	case EaseInQuint:
+		Set(from, to, time, new EaseIn(4));
+		break;
+	case EaseOutQuad:
+		Set(from, to, time, new EaseOut(2));
+		break;
+	case EaseOutCubic:
+		Set(from, to, time, new EaseOut(3));
+		break;
+	case EaseOutQuint:
+		Set(from, to, time, new EaseOut(4));
+		break;
 	default:
 		break;
 	}
@@ -99,4 +117,25 @@ float Tween::ExpoTween::GetCoefValue(float timeCoef)
 Tween::ExpoTween::ExpoTween(float power)
 	:m_Power(power)
 {
+}
+
+Tween::EaseOut::EaseOut(int power)
+	: m_Power(power)
+{
+}
+
+float Tween::EaseOut::GetCoefValue(float timeCoef)
+{
+	int sign = m_Power % 2 == 0 ? -1 : 1;
+	return (sign * (pow(timeCoef - 1, m_Power) + sign));
+}
+
+Tween::EaseIn::EaseIn(int power)
+	: m_Power(power)
+{
+}
+
+float Tween::EaseIn::GetCoefValue(float timeCoef)
+{
+	return pow(timeCoef, m_Power);
 }
