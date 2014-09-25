@@ -209,3 +209,39 @@ sf::Vector2f ToVecf(sf::Vector2i const& vec)
 {
 	return sf::Vector2f(static_cast<float>(vec.x), static_cast<float>(vec.y));
 }
+
+void SplitString(std::string const& str, std::string separator, std::vector<std::string>& outVec)
+{
+	outVec.clear();
+
+	std::size_t curIndex = 0;
+	while (curIndex != std::string::npos)
+	{
+		std::size_t lastIndex = curIndex;
+		curIndex = str.find(separator, curIndex);
+		
+		std::size_t size = (curIndex == std::string::npos)?str.size() - lastIndex : curIndex - lastIndex;
+		
+		if (size > 0)
+			outVec.push_back(str.substr(lastIndex, size));
+		
+		if (curIndex != std::string::npos)
+			curIndex += separator.size();
+	}
+}
+
+std::string ReplaceAll(std::string const& str, std::string const& replaceInstance, std::string const& replaceStr)
+{
+	std::string result = str;
+	while (true)
+	{
+		auto found = result.find(replaceInstance);
+
+		if (found == std::string::npos)
+			break;
+
+		result.replace(found, replaceInstance.size(), replaceStr);
+	}
+
+	return result;
+}

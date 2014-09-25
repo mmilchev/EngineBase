@@ -44,6 +44,9 @@ float Clamp(float val, float bottom, float top);
 float ClampTop(float val, float top);
 float ClampBottom(float val, float bottom);
 
+std::string ReplaceAll(std::string const& str, std::string const& replaceInstance, std::string const& replaceStr);
+void SplitString(std::string const& str, std::string separator, std::vector<std::string>& outVec);
+
 template<class VecType>
 sf::Vector2<VecType> Normalize(sf::Vector2<VecType> const source)
 {
