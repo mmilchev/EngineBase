@@ -17,6 +17,8 @@ public:
 
 	void Run();
 
+	static void Close();
+
 	static void ProcessQeuedObjectsInModules();
 
 	static void ClearScene();

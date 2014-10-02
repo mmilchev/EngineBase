@@ -133,3 +133,8 @@ void Application::ProcessQeuedObjectsInModules()
 	sInstance->m_PhysicsModule.ProcessQueuedObjects();
 	sInstance->m_GraphicsModule.ProcessQueuedObjects();
 }
+
+void Application::Close()
+{
+	sInstance->m_Window.close();
+}
