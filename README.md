@@ -9,8 +9,10 @@ Features:
 GameObject and Component based structure
 Automated Memory management
 
-Scene module:
--Transform parenting
+Scene module:  
+
+-Transform parenting  
+
 -Tag and Layer support
 -Multi-stage initialization
 -Basic and Dynamic components for performance
@@ -37,6 +39,6 @@ Input handling
 -Mouse click on GameObjects
 -Custom shapes for GameObject-Mouse intersection
 
-Watch pointer for nullable objects
-Frame time measurement and scaling
+Watch pointer for nullable objects  
+Frame time measurement and scaling  
 Configuration file loading
