@@ -26,13 +26,13 @@ Automated Memory management
 -Supported colliders: Circle, Rectangle, Custom (by inheritance)  
 -Collision callbacks  
   
-Resource management - loading and releasing  
+**Resource management - loading and releasing**  
 -Textures  
 -Music and sounds  
 -Shaders  
 -Fonts  
 	
-Input handling  
+**Input handling**  
 -Mouse enter/leave callbacks for GameObjects  
 -Mouse click on GameObjects  
 -Custom shapes for GameObject-Mouse intersection  
