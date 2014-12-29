@@ -124,8 +124,21 @@ void SceneModule::RemoveFromPool()
 	}
 }
 
-void SceneModule::DeleteAllObjects()
+void SceneModule::RemoveObjectForSceneChange()
 {
 	for (unsigned int i = 0; i < m_GameObjects.size(); ++i)
+	{
+		auto gObject = m_GameObjects[i].get();
+		if (gObject->ShouldDestroyOnSceneChange())
+			GameObject::Destroy(gObject);
+	}
+		
+}
+
+void SceneModule::RemoveAllObjects()
+{
+	for (unsigned int i = 0; i < m_GameObjects.size(); ++i)
+	{
 		GameObject::Destroy(m_GameObjects[i].get());
+	}
 }

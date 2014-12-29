@@ -60,8 +60,8 @@ public:
 	inline std::string const& GetName() const { return m_Name; }
 	inline std::string const& GetTag()	const { return m_Tag; }
 	inline int GetLayer() const { return m_Layer; }
-	inline bool GetDestroyOnSceneChange() const { return m_DestroyOnSceneChange; }
-	inline void SetDestroyOnSceneChange(bool destroy) { m_DestroyOnSceneChange = destroy; }
+	inline bool ShouldDestroyOnSceneChange() const { return m_DestroyOnSceneChange; }
+	inline void SetShouldDestroyOnSceneChange(bool destroy) { m_DestroyOnSceneChange = destroy; }
 
 	static GameObject* FindByName(const std::string& name);
 	static GameObject* FindByTag(const std::string& tag);

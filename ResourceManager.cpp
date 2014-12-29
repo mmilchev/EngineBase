@@ -24,9 +24,7 @@ ResourceManager::~ResourceManager()
 
 }
 
-using namespace std;
-
-string ResourceManager::GetResourceFilePath(const std::string& subDir, const std::string& filename)
+std::string ResourceManager::GetResourceFilePath(const std::string& subDir, const std::string& filename)
 {
 	std::string filePath;
 	filePath.append(ksResourceFolder);
@@ -52,7 +50,7 @@ sf::Font& ResourceManager::GetFont( const std::string& filename )
 sf::Texture& ResourceManager::GetTexture(const std::string& filename)
 {
 	auto& textures = m_Instance->m_Textures;
-	string filePath = m_Instance->GetResourceFilePath(ksGraphicsFolder, filename);
+	std::string filePath = m_Instance->GetResourceFilePath(ksGraphicsFolder, filename);
 	if (textures.find(filePath) == textures.end())
 	{
 		sf::Texture texture;
@@ -67,7 +65,7 @@ sf::Texture& ResourceManager::GetTexture(const std::string& filename)
 sf::SoundBuffer& ResourceManager::GetSound( const std::string& filename )
 {
 	auto& sBuffers = m_Instance->m_Sounds;
-	string filePath = m_Instance->GetResourceFilePath(ksSoundsFolder, filename);
+	std::string filePath = m_Instance->GetResourceFilePath(ksSoundsFolder, filename);
 	if (sBuffers.find(filePath) == sBuffers.end())
 	{
 		sf::SoundBuffer buffer;
@@ -93,26 +91,11 @@ sf::Shader& ResourceManager::GetShader(const std::string& vShader, const std::st
 	return *shaders[combined];
 }
 
-
-sf::Music& ResourceManager::GetMusic(const std::string& filename)
-{
-	string filePath = m_Instance->GetResourceFilePath(ksMusicFolder, filename);
-	auto& mTracks = m_Instance->m_MusicTracks;
-	if (mTracks.find(filePath) == mTracks.end())
-	{
-		mTracks[filePath] = std::unique_ptr<sf::Music>(new sf::Music());
-		mTracks[filePath]->openFromFile(filePath);
-	}
-
-	return *mTracks[filePath];
-}
-
-//Preloads resrouces from all folders
+//Preloads resources from all folders (except music)
 void ResourceManager::PreloadResources()
 {
 	PreloadResources(sWorkingDir + "/" + ksResourceFolder);
 	PreloadResources(sWorkingDir + "/" + ksResourceFolder + "/" + ksGraphicsFolder);
-	PreloadResources(sWorkingDir + "/" + ksResourceFolder + "/" + ksMusicFolder);
 	PreloadResources(sWorkingDir + "/" + ksResourceFolder + "/" + ksSoundsFolder);
 	PreloadResources(sWorkingDir + "/" + ksResourceFolder + "/" + ksFontFolder);
 }
@@ -138,5 +121,4 @@ void ResourceManager::ReleaseResources()
 	m_Textures.clear();
 	m_Fonts.clear();
 	m_Sounds.clear();
-	m_MusicTracks.clear();
 }

@@ -18,7 +18,8 @@ public:
 	void RegisterGameObject(GameObject* gObject);
 	void UnregisterGameObject(GameObject* gObject);
 
-	void DeleteAllObjects();
+	void RemoveObjectForSceneChange();
+	void RemoveAllObjects();
 
 	static std::vector<std::unique_ptr<GameObject>> const& GetSceneGameObjects();
 	static std::vector<GameObject*> const& GetDestroyedObjectsThisFrame();

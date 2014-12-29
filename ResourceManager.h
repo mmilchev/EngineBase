@@ -17,7 +17,6 @@ public:
 	static sf::Font& GetFont(const std::string& filename);
 	static sf::Texture& GetTexture(const std::string& filename);
 	static sf::SoundBuffer& GetSound(const std::string& filePath);
-	static sf::Music& GetMusic(const std::string& filename);
 	static sf::Shader& GetShader(const std::string& vShader, const std::string& fShader);
 	
 	//Preloads assets in a current directory
@@ -47,7 +46,6 @@ private:
 	std::map<std::string, sf::Texture>					m_Textures;
 	std::map<std::string, sf::SoundBuffer>				m_Sounds;
 	std::map<std::string, std::unique_ptr<sf::Shader>>	m_Shaders;
-	std::map<std::string, std::unique_ptr<sf::Music>>	m_MusicTracks;
 
 	//Singleton
 	static ResourceManager* m_Instance;

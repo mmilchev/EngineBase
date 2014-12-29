@@ -36,6 +36,11 @@ void Application::Run()
 
 		RenderFrame();
 	}
+
+	//Clear the scene and all resources
+	m_SceneModule.RemoveAllObjects();
+	m_SceneModule.ProcessQueuedObjects();
+	m_ResourceManager.ReleaseResources();
 }
 
 sf::RenderTarget* Application::GetDefaultRenderTarget()
@@ -76,7 +81,7 @@ void Application::HandleInput()
 		switch (ev.type)
 		{
 		case sf::Event::Closed:
-			m_Window.close();
+			Close();
 			break;
 		}
 		Input::HandleEvent(ev);
@@ -120,7 +125,7 @@ void Application::RenderFrame()
 
 void Application::ClearScene()
 {
-	sInstance->m_SceneModule.DeleteAllObjects();
+	sInstance->m_SceneModule.RemoveObjectForSceneChange();
 }
 
 void Application::OnNewLevelLoaded()

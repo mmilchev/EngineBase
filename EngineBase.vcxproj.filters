@@ -28,6 +28,9 @@
     <Filter Include="Header\Components">
       <UniqueIdentifier>{4084c246-157b-4e6a-97f7-ef30ffec8bba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header\Modules\Audio">
+      <UniqueIdentifier>{881950a0-db45-406d-b6a9-dc2d695f49b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -129,6 +132,7 @@
     <ClInclude Include="TextRenderer.h">
       <Filter>Header\Modules\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="SoundComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -209,5 +213,6 @@
     <ClCompile Include="BoxInteractionComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="SoundComponent.cpp" />
   </ItemGroup>
 </Project>

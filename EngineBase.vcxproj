@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SoundComponent.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="BoxInteractionComponent.h" />
     <ClInclude Include="CameraComponent.h" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="SoundComponent.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="BoxInteractionComponent.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
