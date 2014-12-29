@@ -35,6 +35,7 @@ public:
 
 	void SetRenderTarget(sf::RenderTarget* target);
 
+	inline sf::View const& GetView() const { return m_View; }
 	inline bool ShouldRenderLayer(int layer) { return (layer & m_LayerMask) == layer; };
 private:
 	void AdjustScreenSize();

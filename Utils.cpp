@@ -210,7 +210,7 @@ sf::Vector2f ToVecf(sf::Vector2i const& vec)
 	return sf::Vector2f(static_cast<float>(vec.x), static_cast<float>(vec.y));
 }
 
-void SplitString(std::string const& str, std::string separator, std::vector<std::string>& outVec)
+void SplitString(std::string const& str, std::string const& separator, std::vector<std::string>& outVec)
 {
 	outVec.clear();
 

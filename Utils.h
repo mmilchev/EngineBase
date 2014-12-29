@@ -45,10 +45,10 @@ float ClampTop(float val, float top);
 float ClampBottom(float val, float bottom);
 
 std::string ReplaceAll(std::string const& str, std::string const& replaceInstance, std::string const& replaceStr);
-void SplitString(std::string const& str, std::string separator, std::vector<std::string>& outVec);
+void SplitString(std::string const& str, std::string const& separator, std::vector<std::string>& outVec);
 
 template<class VecType>
-sf::Vector2<VecType> Normalize(sf::Vector2<VecType> const source)
+sf::Vector2<VecType> Normalize(sf::Vector2<VecType> const& source)
 {
 	float length = sqrt((source.x * source.x) + (source.y * source.y));
 	if (fabs(length) > 0.00000001)
@@ -58,9 +58,15 @@ sf::Vector2<VecType> Normalize(sf::Vector2<VecType> const source)
 }
 
 template<class VecType>
-float Length(sf::Vector2<VecType> const source)
+float Length(sf::Vector2<VecType> const& source)
 {
 	return sqrtf((source.x * source.x) + (source.y * source.y));
+}
+
+template<class VecType>
+float Dot(sf::Vector2<VecType> const& lhs, sf::Vector2<VecType> const& rhs)
+{
+	return static_cast<float>(lhs.x * rhs.x + lhs.y * rhs.y);
 }
 
 #endif
