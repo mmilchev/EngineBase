@@ -132,7 +132,9 @@
     <ClInclude Include="TextRenderer.h">
       <Filter>Header\Modules\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="SoundComponent.h" />
+    <ClInclude Include="SoundComponent.h">
+      <Filter>Header\Modules\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -213,6 +215,8 @@
     <ClCompile Include="BoxInteractionComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="SoundComponent.cpp" />
+    <ClCompile Include="SoundComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
