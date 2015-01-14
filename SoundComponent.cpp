@@ -3,6 +3,7 @@
 
 
 SoundComponent::SoundComponent()
+:m_WasPlayed(false)
 {
 }
 
@@ -14,4 +15,11 @@ void SoundComponent::LoadSound(std::string const& filename)
 void SoundComponent::Play()
 {
 	m_Sound.play();
+	m_WasPlayed = true;
+}
+
+void SoundComponent::PlayOneShot(std::string const& filename)
+{
+	LoadSound(filename);
+	Play();
 }

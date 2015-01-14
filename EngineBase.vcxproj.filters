@@ -135,6 +135,9 @@
     <ClInclude Include="SoundComponent.h">
       <Filter>Header\Modules\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="DestroyOnSoundEnd.h">
+      <Filter>Header\Modules\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -216,6 +219,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="SoundComponent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DestroyOnSoundEnd.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
