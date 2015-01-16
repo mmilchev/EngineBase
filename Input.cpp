@@ -5,6 +5,7 @@
 Input::MouseState		Input::sMouseState;
 Input::KeyboardState	Input::sKeyboardState;
 QueuedVector<InputInteractionComponent*> Input::sInteractableObjects;
+bool Input::sNeedsSorting;
 
 bool Input::GetKey(sf::Keyboard::Key key)
 {
@@ -47,6 +48,13 @@ void Input::ClearCurrentStates()
 	sKeyboardState = KeyboardState();
 	sInteractableObjects.ProcessQueued();
 
+	if (sNeedsSorting)
+	{
+		sInteractableObjects.Sort(
+			[](InputInteractionComponent const* lhs, InputInteractionComponent const* rhs) { return lhs->GetOrder() > rhs->GetOrder(); });
+		sNeedsSorting = false;
+	}
+
 	sMouseState.m_Position = sf::Mouse::getPosition(Application::GetWindow());
 }
 
@@ -81,6 +89,7 @@ void Input::HandleEvent(sf::Event const& ev)
 void Input::RegisterInteractableObj(InputInteractionComponent* cmp)
 {
 	sInteractableObjects.Add(cmp);
+	sNeedsSorting = true;
 }
 
 void Input::UnregisterInteractableObj(InputInteractionComponent* cmp)
@@ -94,7 +103,10 @@ void Input::MarkPressed(sf::Event const& ev)
 	for (auto const obj : raw)
 	{
 		if (obj->Contains(sMouseState.m_Position))
+		{
 			obj->SetPressed(true);
+			break;
+		}
 	}
 }
 
@@ -107,8 +119,12 @@ void Input::MarkClicked(sf::Event const& ev)
 			&& obj->GetPressed())
 		{
 			obj->GetGameObject()->OnClicked();
+			break;
 		}
+	}
 
+	for (auto const obj : raw)
+	{
 		//Pressed should be false at the end no matter what
 		obj->SetPressed(false);
 	}
@@ -126,11 +142,14 @@ void Input::MarkHover()
 		if (contains && !obj->GetHover())
 		{
 			obj->GetGameObject()->OnMouseEnter();
+			obj->SetHover(contains);
+			break;
 		}
 		else if (!contains && obj->GetHover())
 		{
 			obj->GetGameObject()->OnMouseLeave();
+			obj->SetHover(contains);
+			break;
 		}
-		obj->SetHover(contains);
 	}
 }

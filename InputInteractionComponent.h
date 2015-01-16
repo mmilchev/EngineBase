@@ -18,7 +18,8 @@ public:
 	void OnDestruction() override;
 
 	bool Contains(sf::Vector2i const& mousePos);
-		
+	int GetOrder() const;
+
 	inline bool GetHover() const { return m_Hover; }
 	inline bool GetPressed() const { return m_Pressed; }
 	inline void SetHover(bool hover) { m_Hover = hover; }

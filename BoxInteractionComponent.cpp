@@ -15,7 +15,7 @@ bool BoxInteractionComponent::Contains(sf::Vector2f const& pos)
 		&& pos.y <= localPos.y + hH;
 }
 
-BoxInteractionComponent::BoxInteractionComponent(int width, int height)
+BoxInteractionComponent::BoxInteractionComponent(float width, float height)
 	:m_Width(width), m_Height(height)
 {
 }

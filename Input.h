@@ -48,6 +48,8 @@ private:
 	static MouseState sMouseState;
 	static KeyboardState sKeyboardState;
 	static QueuedVector<InputInteractionComponent*> sInteractableObjects;
+
+	static bool sNeedsSorting;
 };
 
 #endif

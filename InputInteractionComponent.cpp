@@ -4,6 +4,7 @@
 #include "CameraComponent.h"
 #include "SpriteRenderer.h"
 #include "Input.h"
+#include "RendererComponent.h"
 
 InputInteractionComponent::InputInteractionComponent()
 :m_Hover(false), m_Pressed(false), m_ShapedComponent(nullptr)
@@ -35,4 +36,10 @@ bool InputInteractionComponent::Contains(sf::Vector2i const& mousePos)
 			return true;
 	}
 	return false;
+}
+
+int InputInteractionComponent::GetOrder() const
+{
+	auto renderer = m_GameObject->GetComponent<RendererComponent>();
+	return renderer != nullptr ? renderer->GetOrder() : 0;
 }

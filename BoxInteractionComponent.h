@@ -8,12 +8,12 @@ class BoxInteractionComponent
 	: public Component, public IShaped
 {
 public:
-	BoxInteractionComponent(int width, int height);
+	BoxInteractionComponent(float width, float height);
 
 	virtual bool Contains(sf::Vector2f const& pos) override;
 
 private:
-	int m_Width, m_Height;
+	float m_Width, m_Height;
 };
 
 #endif
